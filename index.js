@@ -4,7 +4,7 @@ const searchResultEl = document.querySelector('.search-results')
 
 searchBtn.addEventListener('click', async() => {
     const adjustedInput = searchMovieInput.value.toLowerCase().trim().replace(/\s+/g, '+').split(' ')
-    const resp = await fetch(`http://www.omdbapi.com/?s=${adjustedInput}&type=movie&apikey=41912cb`)
+    const resp = await fetch(`https://www.omdbapi.com/?s=${adjustedInput}&type=movie&apikey=41912cb`)
     const data = await resp.json()
 
     console.log(data)
@@ -13,7 +13,7 @@ searchBtn.addEventListener('click', async() => {
     searchResultEl.innerHTML = ''
 
     movieArr.forEach(async (item) => {
-        const resp = await fetch(`http://www.omdbapi.com/?i=${item.imdbID}&apikey=41912cb`)
+        const resp = await fetch(`https://www.omdbapi.com/?i=${item.imdbID}&apikey=41912cb`)
         const data = await resp.json()
 
         const trimGenre = data.Genre.split(',').slice(0,3).join(',')
