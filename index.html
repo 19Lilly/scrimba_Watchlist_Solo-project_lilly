@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Watchlist - Solo project on www.scrimba.com</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <h2 class="title">Find your film</h2>
+        <a class="watchlist-link" href="watchlist.html">My watchlist</a>
+      </header>
+
+      <label for="search">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-search"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path>
+          <path d="M21 21l-6 -6"></path>
+        </svg>
+        <input
+          class="search-movie-input"
+          type="search"
+          placeholder="Search for a movie"
+        />
+        <button class="btn search-btn">Search</button>
+      </label>
+      <div class="search-results">
+        <div class="placeholder">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-movie"
+            width="60"
+            height="60"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
+            ></path>
+            <path d="M8 4l0 16"></path>
+            <path d="M16 4l0 16"></path>
+            <path d="M4 8l4 0"></path>
+            <path d="M4 16l4 0"></path>
+            <path d="M4 12l16 0"></path>
+            <path d="M16 8l4 0"></path>
+            <path d="M16 16l4 0"></path>
+          </svg>
+          Start exploring
+        </div>
+
+        <!-- <div class="movie-card">
+          <img
+            class="movie-img"
+            src="https://images.unsplash.com/photo-1551269901-5c5e14c25df7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80"
+            alt="unsplash"
+          />
+          <h2 class="movie-title">
+            Harry Potter
+            <span class="rating">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-star-filled"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M8.243 7.34l-6.38 .925l-.113 .023a1 1 0 0 0 -.44 1.684l4.622 4.499l-1.09 6.355l-.013 .11a1 1 0 0 0 1.464 .944l5.706 -3l5.693 3l.1 .046a1 1 0 0 0 1.352 -1.1l-1.091 -6.355l4.624 -4.5l.078 -.085a1 1 0 0 0 -.633 -1.62l-6.38 -.926l-2.852 -5.78a1 1 0 0 0 -1.794 0l-2.853 5.78z"
+                  stroke-width="0"
+                  fill="currentColor"
+                ></path>
+              </svg>
+              8.1
+            </span>
+          </h2>
+          <p class="rating"></p>
+          <p class="duration">118 min</p>
+          <p class="genre">drama, horor</p>
+          <button class="btn add-to-watchlist">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-circle-plus"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+              <path d="M9 12h6"></path>
+              <path d="M12 9v6"></path>
+            </svg>
+            Watchlist
+          </button>
+          <p class="plot">
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit beatae
+            quisquam repellendus tempora ab accusantium consectetur
+            voluptatibus. Eum ducimus culpa soluta molestiae architecto, alias
+            provident vero possimus assumenda, sunt deleniti.
+          </p>
+        </div> -->
+      </div>
+    </main>
+
+    <script src="index.js"></script>
+  </body>
+</html>
