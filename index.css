@@ -58,6 +58,12 @@ li {
   padding: 0;
 }
 
+/*-----utilities-----*/
+
+.hidden {
+  display: none;
+}
+
 /*-----main-----*/
 
 body {
@@ -181,7 +187,7 @@ input:focus {
 .movie-img {grid-area: movie-img;}
 .movie-title{grid-area: movie-title; align-self: center;}
 .movie-info {grid-area: movie-info;  display: flex; gap: 0.5em; justify-content: space-between; align-items: center;}
-.add-to-watchlist{display: flex; align-items: center;}
+.add-to-watchlist{display:flex; align-self: center;}
 .plot{grid-area: plot;}
 
 .rating svg {
@@ -192,4 +198,6 @@ input:focus {
     font-size: 1rem;
 }
 
-
+.remove-from-watchlist {
+  display: none;
+}

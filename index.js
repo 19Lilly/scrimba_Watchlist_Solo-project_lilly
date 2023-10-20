@@ -1,25 +1,39 @@
-const searchBtn = document.querySelector('.search-btn')
-const searchMovieInput = document.querySelector('.search-movie-input')
-const searchResultEl = document.querySelector('.search-results')
+const searchBtn = document.querySelector(".search-btn");
+const searchMovieInput = document.querySelector(".search-movie-input");
+const searchResultEl = document.querySelector(".search-results");
+const addToWatchlistBtn = document.querySelector(".add-to-watchlist");
+const removeFromWatchlistBtn = document.querySelector(".remove-from-watchlist");
 
-searchBtn.addEventListener('click', async() => {
-    const adjustedInput = searchMovieInput.value.toLowerCase().trim().replace(/\s+/g, '+').split(' ')
-    const resp = await fetch(`https://www.omdbapi.com/?s=${adjustedInput}&type=movie&apikey=41912cb`)
-    const data = await resp.json()
+let addToWatchList = [];
+let movieId = "";
+let searchResultMovieArr = [];
 
-    console.log(data)
+searchBtn.addEventListener("click", async () => {
+ /* let searchResultMovieArr = [];*/
+  const adjustedInput = searchMovieInput.value
+  .toLowerCase()
+  .trim()
+  .replace(/\s+/g, "+")
+  .split(" ");
+  const resp = await fetch(
+    `https://www.omdbapi.com/?s=${adjustedInput}&type=movie&apikey=41912cb`
+    );
+    const dataD = await resp.json();
+    
+    const movieArr = dataD.Search;
+   searchResultEl.innerHTML = "";
 
-    const movieArr = data.Search
-    searchResultEl.innerHTML = ''
+  movieArr.forEach(async (item) => {
+    const resp = await fetch(
+      `https://www.omdbapi.com/?i=${item.imdbID}&apikey=41912cb`
+    );
+    const data = await resp.json();
+    const trimGenre = data.Genre.split(",").slice(0, 3).join(",");
+    searchResultMovieArr.push(data);
 
-    movieArr.forEach(async (item) => {
-        const resp = await fetch(`https://www.omdbapi.com/?i=${item.imdbID}&apikey=41912cb`)
-        const data = await resp.json()
-
-        const trimGenre = data.Genre.split(',').slice(0,3).join(',')
-     
-        
-        searchResultEl.insertAdjacentHTML("beforeend", `
+    searchResultEl.insertAdjacentHTML(
+      "beforeend",
+      `
         <div class="movie-card">
         <img
           class="movie-img"
@@ -51,11 +65,13 @@ searchBtn.addEventListener('click', async() => {
             ${data.imdbRating}
           </span>
         </h2>
-        <p class="movie-info"><span>${data.Runtime}</span> ${trimGenre}
-        <button class="btn add-to-watchlist">
+        <p class="movie-info">
+        <span>${data.Runtime}</span>
+         ${trimGenre} 
+        <button class="add-to-watchlist" data-add="${data.imdbID}">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            class="icon icon-tabler icon-tabler-circle-plus"
+            class="icon icon-tabler icon-tabler-circle-plus add-to-watchlist"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -71,14 +87,71 @@ searchBtn.addEventListener('click', async() => {
             <path d="M12 9v6"></path>
           </svg>
           Watchlist
+        </button> 
+        <button class="remove-from-watchlist" data-remove="${data.imdbID}">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-minus" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+        <path d="M9 12l6 0"></path>
+        </svg>
+        Remove
         </button>
         </p>
         <p class="plot">
           ${data.Plot}
         </p>
-      </div>`)     
+      </div>`
+    );
+  });
 
-    })
 
 
-})
+});
+
+searchResultEl.addEventListener("click", (e) => {
+  if (e.target.dataset.add) {
+    e.target.style.display = "none"
+    e.target.nextElementSibling.style.display= "flex"
+    addMovieToWatchList(e.target.dataset.add, searchResultMovieArr)
+    console.log(addToWatchList)
+  }
+  sendDataToLocalStorage(addToWatchList);
+
+  if(e.target.dataset.remove){
+    e.target.style.display = "none"
+    e.target.previousElementSibling.style.display= "flex"
+
+    // removeMovieFromWatchList(e.target.dataset.remove, addToWatchList)
+    // removeItemFromLocalStorage(e.target.dataset.remove)
+
+  }
+
+});
+
+function addMovieToWatchList(id, array) {
+  addToWatchList.push(
+    array.filter((item) => item.imdbID == id)
+  );
+}
+
+
+
+
+// function removeMovieFromWatchList (id, array) {
+  
+//   const index = array.indexOf();
+//   console.log(index)
+//   const x = array.splice(index,1);
+//   console.log(array)
+// }
+
+function sendDataToLocalStorage(array) {
+  localStorage.setItem("addedMovies", JSON.stringify(array));
+}
+
+// function removeItemFromLocalStorage (id){
+//   const arrayFromLocalStorage = JSON.parse(localStorage.getItem("addedMovies"))
+//   arrayFromLocalStorage.splice(arrayFromLocalStorage.indexOf(arrayFromLocalStorage.filter((item)=> item.imdbID == id)), 1)
+//   localStorage.setItem("addedMovies",JSON.stringify(arrayFromLocalStorage));
+// } 
+
