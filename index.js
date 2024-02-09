@@ -9,19 +9,19 @@ let movieId = "";
 let searchResultMovieArr = [];
 
 searchBtn.addEventListener("click", async () => {
- /* let searchResultMovieArr = [];*/
+  /* let searchResultMovieArr = [];*/
   const adjustedInput = searchMovieInput.value
-  .toLowerCase()
-  .trim()
-  .replace(/\s+/g, "+")
-  .split(" ");
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "+")
+    .split(" ");
   const resp = await fetch(
     `https://www.omdbapi.com/?s=${adjustedInput}&type=movie&apikey=41912cb`
-    );
-    const dataD = await resp.json();
-    
-    const movieArr = dataD.Search;
-   searchResultEl.innerHTML = "";
+  );
+  const dataD = await resp.json();
+
+  const movieArr = dataD.Search;
+  searchResultEl.innerHTML = "";
 
   movieArr.forEach(async (item) => {
     const resp = await fetch(
@@ -103,47 +103,36 @@ searchBtn.addEventListener("click", async () => {
       </div>`
     );
   });
-
-
-
 });
 
 searchResultEl.addEventListener("click", (e) => {
   if (e.target.dataset.add) {
-    e.target.style.display = "none"
-    e.target.nextElementSibling.style.display= "flex"
-    addMovieToWatchList(e.target.dataset.add, searchResultMovieArr)
-    console.log(addToWatchList)
+    e.target.style.display = "none";
+    e.target.nextElementSibling.style.display = "flex";
+    addMovieToWatchList(e.target.dataset.add, searchResultMovieArr);
+    console.log(addToWatchList);
   }
   sendDataToLocalStorage(addToWatchList);
 
-  if(e.target.dataset.remove){
-    e.target.style.display = "none"
-    e.target.previousElementSibling.style.display= "flex"
+  if (e.target.dataset.remove) {
+    e.target.style.display = "none";
+    e.target.previousElementSibling.style.display = "flex";
 
-    // removeMovieFromWatchList(e.target.dataset.remove, addToWatchList)
+    removeMovieFromWatchList(e.target.dataset.remove, addToWatchList);
     // removeItemFromLocalStorage(e.target.dataset.remove)
-
   }
-
 });
 
 function addMovieToWatchList(id, array) {
-  addToWatchList.push(
-    array.filter((item) => item.imdbID == id)
-  );
+  addToWatchList.push(array.filter((item) => item.imdbID == id));
 }
 
-
-
-
-// function removeMovieFromWatchList (id, array) {
+function removeMovieFromWatchList(id, array) {
+  const data = array;
   
-//   const index = array.indexOf();
-//   console.log(index)
-//   const x = array.splice(index,1);
-//   console.log(array)
-// }
+  // const res =  array.indexOf(id === data.imdbID)
+  // console.log(res)
+}
 
 function sendDataToLocalStorage(array) {
   localStorage.setItem("addedMovies", JSON.stringify(array));
@@ -153,5 +142,4 @@ function sendDataToLocalStorage(array) {
 //   const arrayFromLocalStorage = JSON.parse(localStorage.getItem("addedMovies"))
 //   arrayFromLocalStorage.splice(arrayFromLocalStorage.indexOf(arrayFromLocalStorage.filter((item)=> item.imdbID == id)), 1)
 //   localStorage.setItem("addedMovies",JSON.stringify(arrayFromLocalStorage));
-// } 
-
+// }
